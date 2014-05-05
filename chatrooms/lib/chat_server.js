@@ -43,7 +43,7 @@ function joinRoom(socket, room){
 	if(usersInRoom.length > 1){
 		var usersInRoomSummary = 'Users currently in ' + room + ': ';
 		for(var i in usersInRoom){
-			var userSocketId = userInRoom[i].id;
+			var userSocketId = usersInRoom[i].id;
 			if(userSocketId != socket.id){
 				usersInRoomSummary = (i > 0) ? usersInRoomSummary + ', ' : usersInRoomSummary;
 				usersInRoomSummary += nickNames[userSocketId];
@@ -61,7 +61,7 @@ function handleNameChangeAttempts(socket, nickNames, namesUsed){
 		}else{
 			if(namesUsed.indexOf(name) == -1){
 				var previousName = nickNames[socket.id];
-				var previousNameIndex = namesUsed.indexOf(previousNames);
+				var previousNameIndex = namesUsed.indexOf(previousName);
 				namesUsed.push(name);
 				nickNames[socket.id] = name;
 
