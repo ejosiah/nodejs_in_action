@@ -5,7 +5,7 @@ var nickNames = {};
 var namesUsed = [];
 var currentRoom = {};
 
-export.listen = function(server){
+exports.listen = function(server){
 	io = socketio.listen(server);
 	io.set('log level', 1);
 	io.sockets.on('connection', function(socket){
@@ -37,7 +37,7 @@ function joinRoom(socket, room){
 	socket.join(room);
 	currentRoom[socket.id] = room;
 	socket.emit('joinResult', {room : room});
-	socket.broadcast.to(room).emit{'message', { text : nickNames[socket.id] + ' has joined ' + room + '.'}};
+	socket.broadcast.to(room).emit('message', { text : nickNames[socket.id] + ' has joined ' + room + '.'});
 
 	var usersInRoom = io.sockets.clients(room);
 	if(usersInRoom.length > 1){
